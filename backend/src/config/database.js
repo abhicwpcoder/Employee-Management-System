@@ -13,10 +13,12 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
-      ssl: {
+      ssl: process.env.NODE_ENV === 'production' ? {
         require: true,
         rejectUnauthorized: false
-      }
+      } : false,
+      connectTimeoutMS: 10000,
+      family: 4  // Force IPv4 to avoid IPv6 ENETUNREACH issues
     },
     pool: {
       max: 5,
