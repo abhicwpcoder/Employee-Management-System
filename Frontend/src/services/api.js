@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Change this to port 5001 (or whatever port your backend is running on)
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api/v1';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const api = axios.create({
   baseURL: API_URL,
