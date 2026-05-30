@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { FiUser, FiMail, FiPhone, FiBriefcase, FiMapPin, FiEdit2, FiCalendar, FiShield, FiCheckCircle } from 'react-icons/fi';
+import { FiUser, FiBriefcase, FiMapPin, FiEdit2} from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 const ProfilePage = () => {
