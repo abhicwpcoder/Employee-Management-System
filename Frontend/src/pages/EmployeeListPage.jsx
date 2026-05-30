@@ -7,6 +7,7 @@ const EmployeeListPage = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [filterDepartment, setFilterDepartment] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
   const [departments, setDepartments] = useState([]);
@@ -16,11 +17,19 @@ const EmployeeListPage = () => {
   const token = localStorage.getItem('token');
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api/v1';
 
+  // Debounce: wait 500ms after user stops typing before updating debouncedSearchTerm
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
+
   const fetchEmployees = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
-      if (searchTerm) params.append('search', searchTerm);
+      if (debouncedSearchTerm) params.append('search', debouncedSearchTerm);
       if (filterDepartment) params.append('department', filterDepartment);
       if (filterStatus) params.append('status', filterStatus);
 
@@ -39,7 +48,7 @@ const EmployeeListPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [searchTerm, filterDepartment, filterStatus, token, API_URL]);
+  }, [debouncedSearchTerm, filterDepartment, filterStatus, token, API_URL]);
 
   useEffect(() => {
     fetchEmployees();
@@ -140,6 +149,11 @@ const EmployeeListPage = () => {
               placeholder="Search by name, email, or ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault(); // Prevent any accidental form submission / page reload
+                }
+              }}
               style={{ width: '100%', padding: '0.5rem 0.5rem 0.5rem 2rem', border: '1px solid #e2e8f0', borderRadius: '0.75rem' }}
             />
           </div>
