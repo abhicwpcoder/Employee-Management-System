@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 router.use(protect);
-router.get('/', authorize('admin', 'manager'), getEmployees);
+router.get('/', authorize('admin', 'manager', 'employee'), getEmployees);
 router.get('/department/:dept', authorize('admin', 'manager', 'employee'), getEmployeesByDepartment);
 router.post('/', authorize('admin'), createEmployee);
 router.get('/:id', getEmployeeById);
