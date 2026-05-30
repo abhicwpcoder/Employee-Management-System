@@ -14,7 +14,7 @@ const LoginPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch('https://employee-management-backend.onrender.com/api/v1/auth/login', {
+      const response = await fetch('https://employee-management-system-xks4.onrender.com/api/v1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
