@@ -19,7 +19,7 @@ const limiter = rateLimit({
 app.use(
   cors({
     origin: [
-      "https://employee-management-system-kohl-six.vercel.app"
+      "https://employee-management-system-kohl-six.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
