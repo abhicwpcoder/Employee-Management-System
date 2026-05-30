@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   FiArrowRight, FiUsers, FiBarChart2, FiLock, FiClock, 
-  FiCheckCircle, FiStar, FiTrendingUp, FiShield, FiAward,
-  FiCode, FiZap, FiCloud, FiHeart
+  FiCheckCircle, FiTrendingUp, FiAward, FiZap, FiCloud, FiHeart
 } from 'react-icons/fi';
 
 const HomePage = () => {
